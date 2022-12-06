@@ -13,7 +13,7 @@ Page screensaver
     Events
         Preinitialize Event
             recmod=1
-            bauds=115200
+            baud=115200
             vis tInstruction,0
             vis tTmp,0
             vis p0,0
@@ -33,11 +33,20 @@ Page screensaver
             //page open event
             // clear weather elements, to keep example content in HMI
         
+        Postinitialize Event
+            click m0,1
+        
 Variable (string) strCommand
     Attributes
         Scope         : local
         Text          : 
         Max. Text Size: 200
+    
+Variable (string) strTmp
+    Attributes
+        Scope         : local
+        Text          : 
+        Max. Text Size: 2
     
 Variable (string) tId
     Attributes
@@ -97,6 +106,16 @@ Variable (int32) ycR
     Attributes
         Scope: local
         Value: 0
+    
+Text m0
+    Attributes
+        Scope                               : local
+        Dragging                            : 0
+        Disable release event after dragging: 0
+        Send Component ID                   : disabled
+        Associated Keyboard                 : none
+        Text                                : 
+        Max. Text Size                      : 10
     
 Text t10
     Attributes
@@ -567,6 +586,7 @@ Timer tmSerial
                                         spstr strCommand.txt,tIcon2.txt,"~",19
                                         spstr strCommand.txt,tTmp.txt,"~",20
                                         covx tTmp.txt,tIcon2.pco,0,0
+                                        click m0,1
                                     }
                                     if(tInstruction.txt=="color"&&tNotifyHead.txt==""&&tNotifyText.txt=="")
                                     {
